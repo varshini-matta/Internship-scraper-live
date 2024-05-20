@@ -101,7 +101,7 @@ if __name__=="__main__":
     body = json.dumps(int_data, indent=2)
     send_email(body)
 
-    print('Finished.')
+    print('Finished..')
   
     
 
