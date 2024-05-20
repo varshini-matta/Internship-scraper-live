@@ -1,3 +1,6 @@
+import os
+import smtplib
+import json
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -46,6 +49,33 @@ def parse(intern):
     'location':location_element,
     'date':date_details
   }
+
+def send_email(body):
+  try:
+    server_ssl = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    server_ssl.ehlo() 
+  
+    SENDER_EMAIL = 'top.intern.info@gmail.com'
+    RECEIVER_EMAIL = 'top.intern.info@gmail.com'
+    #SENDER_PASSWORD = os.environ['GMAIL_PASSWORD']
+    subject = 'Internships at AWS'
+    
+    SENDER_PASSWORD = os.environ['GMAIL_PASSWORD']
+
+    email_text = f"""
+    From: {SENDER_EMAIL}
+    To: {RECEIVER_EMAIL}
+    Subject: {subject}
+
+    {body}
+    """
+
+    server_ssl.login(SENDER_EMAIL, SENDER_PASSWORD)
+    server_ssl.sendmail(SENDER_EMAIL,RECEIVER_EMAIL,email_text)
+    print('mail sent to',RECEIVER_EMAIL)
+    
+  except:
+    print('Something went wrong...')
   
 
 if __name__=="__main__":
@@ -62,11 +92,16 @@ if __name__=="__main__":
   #job title,company name,place,hiring status,date,photo
     int_data=[parse(intern) for intern in internship[:10]]
    # intern=internship[0]
-    print(int_data)
+    #print(int_data)
     print('save to csv')
     intern_df=pd.DataFrame(int_data)
     print(intern_df)
     intern_df.to_csv('internship.csv')
+    print("Send the results over email")
+    body = json.dumps(int_data, indent=2)
+    send_email(body)
+
+    print('Finished.')
   
     
 
