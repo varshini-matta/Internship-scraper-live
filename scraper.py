@@ -76,7 +76,8 @@ def send_email(body):
     
   except:
     print('Something went wrong...')
-  
+
+#main
 
 if __name__=="__main__":
     print('Creating Driver')
