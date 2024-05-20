@@ -102,6 +102,8 @@ if __name__=="__main__":
     send_email(body)
 
     print('Finished..')
+    print('Mail Finished..')
+    
   
     
 
