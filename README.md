@@ -1,5 +1,6 @@
-# Project Overview
-**Internify: Simplifying Internship Search**
+# Internify: Simplifying Internship Search
+**Project Overview**
+<br>
 This project automates the process of scraping internship listings from various websites and sends real-time notifications to students via email. This ensures that students do not miss any internship opportunities during the current period of high demand. The solution leverages Selenium for web scraping and AWS Lambda for serverless execution and notification delivery.
 
 ## Components
